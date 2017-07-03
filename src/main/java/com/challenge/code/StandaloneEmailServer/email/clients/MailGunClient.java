@@ -35,8 +35,8 @@ public class MailGunClient implements MailClientInterface {
 		try {
 			LOG.info("MailGun received: " + emailBean.toString());
 			
-			String API_KEY = System.getProperty("MailGunApiKey");
-			String MAILGUN_URL = System.getProperty("MailGunServiceUrl");
+			String API_KEY = System.getenv("MailGunApiKey");
+			String MAILGUN_URL = System.getenv("MailGunServiceUrl");
 					
 			RestTemplate template = new RestTemplate();
 

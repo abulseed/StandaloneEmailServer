@@ -46,7 +46,7 @@ public class FailoverController implements FailoverControllerInterface {
 						currentClient);
 				return emailFacadeUtility.sendEmail(emailRequest);
 			} catch (Exception e) {
-				builder.append(e.getMessage()).append("\r\n");
+				builder.append(e.getMessage()).append(" , ");
 				LOG.error("Sending failed.. " + currentClient.getSendingStatus() + " :: " + e.getMessage());
 			}
 		}

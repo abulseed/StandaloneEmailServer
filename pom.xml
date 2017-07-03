@@ -82,6 +82,16 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<environmentVariables>
+						<MailGunApiKey>api:key-32ebb9cd33fbf934ee8234fb153d374c</MailGunApiKey>
+						<MailGunServiceUrl>https://api.mailgun.net/v3/sandbox030642a8056f4ae5b2c4b0201fb09d21.mailgun.org/messages</MailGunServiceUrl>
+					</environmentVariables>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 </project>
