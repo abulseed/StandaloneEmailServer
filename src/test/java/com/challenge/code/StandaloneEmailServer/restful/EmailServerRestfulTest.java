@@ -6,20 +6,26 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import javax.ws.rs.core.MediaType;
+
+import org.apache.commons.codec.binary.Base64;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.challenge.code.StandaloneEmailServer.SpringBootMainApplication;
 import com.challenge.code.StandaloneEmailServer.json.beans.request.EmailRequest;
 import com.challenge.code.StandaloneEmailServer.json.beans.response.EmailResponse;
 
-@RunWith(SpringRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = SpringBootMainApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class EmailServerRestfulTest {
 
@@ -38,8 +44,12 @@ public class EmailServerRestfulTest {
 		emailRequest.setSubject("test");
 		emailRequest.setBody("test");
 
-		ResponseEntity<EmailResponse> responseEntity = restTemplate.postForEntity("/SendEmail", emailRequest,
-				EmailResponse.class);
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Authorization", "Basic " + new String(Base64.encodeBase64("mockUser:mockPassword".getBytes())));
+		headers.add("Content-Type", MediaType.APPLICATION_JSON);
+
+		ResponseEntity<EmailResponse> responseEntity = restTemplate.exchange("/SendEmail", HttpMethod.POST,
+				new HttpEntity<>(emailRequest, headers), EmailResponse.class);
 
 		EmailResponse emailResponse = responseEntity.getBody();
 
@@ -57,8 +67,12 @@ public class EmailServerRestfulTest {
 		emailRequest.setSubject("test");
 		emailRequest.setBody("test");
 
-		ResponseEntity<EmailResponse> responseEntity = restTemplate.postForEntity("/SendEmail", emailRequest,
-				EmailResponse.class);
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Authorization", "Basic " + new String(Base64.encodeBase64("mockUser:mockPassword".getBytes())));
+		headers.add("Content-Type", MediaType.APPLICATION_JSON);
+
+		ResponseEntity<EmailResponse> responseEntity = restTemplate.exchange("/SendEmail", HttpMethod.POST,
+				new HttpEntity<>(emailRequest, headers), EmailResponse.class);
 
 		EmailResponse emailResponse = responseEntity.getBody();
 
@@ -76,8 +90,12 @@ public class EmailServerRestfulTest {
 		emailRequest.setSubject(null);
 		emailRequest.setBody(null);
 
-		ResponseEntity<EmailResponse> responseEntity = restTemplate.postForEntity("/SendEmail", emailRequest,
-				EmailResponse.class);
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Authorization", "Basic " + new String(Base64.encodeBase64("mockUser:mockPassword".getBytes())));
+		headers.add("Content-Type", MediaType.APPLICATION_JSON);
+
+		ResponseEntity<EmailResponse> responseEntity = restTemplate.exchange("/SendEmail", HttpMethod.POST,
+				new HttpEntity<>(emailRequest, headers), EmailResponse.class);
 
 		EmailResponse emailResponse = responseEntity.getBody();
 
@@ -95,9 +113,34 @@ public class EmailServerRestfulTest {
 		emailRequest.setSubject("test");
 		emailRequest.setBody("test");
 
-		ResponseEntity<EmailResponse> responseEntity = restTemplate.postForEntity("/SendEmailWrongURI", emailRequest,
-				EmailResponse.class);
+		HttpHeaders headers = new HttpHeaders();
+
+		byte[] base64Bytes = Base64.encodeBase64("mockUser:mockPassword".getBytes());
+		String user = new String(base64Bytes);
+
+		headers.add("Authorization", "Basic " + user);
+		headers.add("Content-Type", MediaType.APPLICATION_JSON);
+
+		ResponseEntity<EmailResponse> responseEntity = restTemplate.exchange("/SendEmailWrongURI", HttpMethod.POST,
+				new HttpEntity<>(emailRequest, headers), EmailResponse.class);
 
 		assertEquals(org.springframework.http.HttpStatus.NOT_FOUND, responseEntity.getStatusCode());
+	}
+
+	@Test
+	public void sendEmailClientUnAuthorized() {
+		EmailRequest emailRequest = new EmailRequest();
+		emailRequest.setRecipient("test@test.test");
+		emailRequest.setSubject("test");
+		emailRequest.setBody("test");
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Authorization", "Basic " + new String(Base64.encodeBase64("mockUser1:mockPassword1".getBytes())));
+		headers.add("Content-Type", MediaType.APPLICATION_JSON);
+
+		ResponseEntity<EmailResponse> responseEntity = restTemplate.exchange("/SendEmail", HttpMethod.POST,
+				new HttpEntity<>(emailRequest, headers), EmailResponse.class);
+
+		assertEquals(org.springframework.http.HttpStatus.UNAUTHORIZED, responseEntity.getStatusCode());
 	}
 }
