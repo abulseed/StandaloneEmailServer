@@ -1,0 +1,1 @@
+mvn -DMailGunApiKey=api:key-32ebb9cd33fbf934ee8234fb153d374c -DMailGunServiceUrl=https://api.mailgun.net/v3/sandbox030642a8056f4ae5b2c4b0201fb09d21.mailgun.org/messages clean install

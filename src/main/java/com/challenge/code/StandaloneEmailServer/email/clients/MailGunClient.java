@@ -25,9 +25,6 @@ public class MailGunClient implements MailClientInterface {
 
 	private static final Logger LOG = LoggerFactory.getLogger(MailGunClient.class);
 
-	private final String API_KEY = "api:key-32ebb9cd33fbf934ee8234fb153d374c";
-	private final String MAILGUN_URL = "https://api.mailgun.net/v3/sandbox030642a8056f4ae5b2c4b0201fb09d21.mailgun.org/messages";
-	
 	private SendingStatus sendingStatus = SendingStatus.Success;
 
 	public MailGunClient() {
@@ -38,6 +35,9 @@ public class MailGunClient implements MailClientInterface {
 		try {
 			LOG.info("MailGun received: " + emailBean.toString());
 			
+			String API_KEY = System.getProperty("MailGunApiKey");
+			String MAILGUN_URL = System.getProperty("MailGunServiceUrl");
+					
 			RestTemplate template = new RestTemplate();
 
 			byte[] base64Bytes = Base64.encodeBase64(API_KEY.getBytes());

@@ -22,7 +22,7 @@ public class SendGridClient implements MailClientInterface {
 
 	private static final Logger LOG = LoggerFactory.getLogger(SendGridClient.class);
 
-	private final String API_KEY = "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";
+	private final String API_KEY = "";
 
 	private SendingStatus sendingStatus = SendingStatus.Success;
 
