@@ -44,3 +44,8 @@ The service should behave as expected the only problem for now is SendGrid imple
 Spring-boot recommends using Cross-Site Request Forgery detection which I had to disable for now. But I think we can implement it using a random access token generation.
 
 Note: I chose to work with back-end technical track which is my speciality and also because of the time limit. But I can work also with front-end however I might require minimum support.
+
+Improvement:
+============
+
+Store Email API keys in system environment variables (currently it is set in system properties and i had to push them to github). That choice was made to cut the time needed for debugging how heroku store system environment variables.
