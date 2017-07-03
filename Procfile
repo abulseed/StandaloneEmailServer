@@ -1,0 +1,1 @@
+web: java -jar target/StandaloneEmailServer-1.0.jar
