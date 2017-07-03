@@ -51,4 +51,6 @@ Store Email API keys in system environment variables (currently it is set in sys
 8- Notes:
 =========
 
-I chose to work with back-end technical track which is my field of speciality and also because of the time limit. But I can as well work with front-end however I might require minimum support.
+- I chose to work with back-end technical track which is my field of speciality and also because of the time limit. But I can as well work with front-end however I might require minimum support.
+- SoapUI project "email-server-heroku.xml" is included for testing the service API.
+- Service public URL is "https://evening-ocean-75917.herokuapp.com/SendEmail".
