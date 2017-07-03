@@ -29,6 +29,7 @@ Technical tradeoffs:
 --------------------
 Pros: 
 - Service Availability: The service is deployed on the cloud and would have a near perfect up time.
+Cons:
 - Request processing time: the processing would depend on the Email service provider interface and how long it would take to accept and acknowledge emails.
 
 	
