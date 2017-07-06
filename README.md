@@ -25,30 +25,34 @@ Implemented the service using REST API to provide a clean separation of concerns
 **Solution:** Implement the service using the REST implementation of spring-boot.
 
 
-Technical tradeoffs:
---------------------
+5- Technical tradeoffs:
+=======================
+
 Pros: 
 - Service Availability: The service is deployed on the cloud and would have a near perfect up time.
 Cons:
 - Request processing time: the processing would depend on the Email service provider interface and how long it would take to accept and acknowledge emails.
 
 	
-5- Correctness: 
+6- Correctness: 
 ===============
 
 The service should behave as expected the only problem for now is SendGrid implementation because my test account was de-authorized for some reason and I would need more time to fix it.
 
-6- Security: 
+
+7- Security: 
 ============
 
 Spring-boot recommends using Cross-Site Request Forgery detection which I had to disable for now. But I think we can implement it using a random access token generation.
 
-7- Improvement:
+
+8- Improvement:
 ===============
 
 Store Email API keys in system environment variables (currently it is set in system properties and i had to push them to github). That choice was made to cut the time needed for debugging how heroku store system environment variables.
 
-8- Notes:
+
+9- Notes:
 =========
 
 - I chose to work with back-end technical track which is my field of speciality and also because of the time limit. But I can as well work with front-end however I might require minimum support.
