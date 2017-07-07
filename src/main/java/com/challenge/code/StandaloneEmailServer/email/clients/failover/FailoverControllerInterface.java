@@ -1,6 +1,5 @@
 package com.challenge.code.StandaloneEmailServer.email.clients.failover;
 
-import com.challenge.code.StandaloneEmailServer.email.clients.MailClientInterface;
 import com.challenge.code.StandaloneEmailServer.email.clients.MailGunClient;
 import com.challenge.code.StandaloneEmailServer.email.clients.SendGridClient;
 
@@ -14,5 +13,5 @@ public interface FailoverControllerInterface {
 	public int handleEmailSending() throws Exception;
 	public MailGunClient getMailGunClient();
 	public SendGridClient getSendGridClient();
-	public MailClientInterface[] getAvailableClients();
+	public int getAvailableClients();
 }

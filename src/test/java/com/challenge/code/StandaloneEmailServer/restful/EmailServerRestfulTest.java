@@ -6,6 +6,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.nio.charset.Charset;
+
 import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.codec.binary.Base64;
@@ -45,7 +47,7 @@ public class EmailServerRestfulTest {
 		emailRequest.setBody("test");
 
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("Authorization", "Basic " + new String(Base64.encodeBase64("mockUser:mockPassword".getBytes())));
+		headers.add("Authorization", "Basic " + new String(Base64.encodeBase64("mockUser:mockPassword".getBytes(Charset.forName("UTF-8"))), Charset.forName("UTF-8")));
 		headers.add("Content-Type", MediaType.APPLICATION_JSON);
 
 		ResponseEntity<EmailResponse> responseEntity = restTemplate.exchange("/SendEmail", HttpMethod.POST,
@@ -68,7 +70,7 @@ public class EmailServerRestfulTest {
 		emailRequest.setBody("test");
 
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("Authorization", "Basic " + new String(Base64.encodeBase64("mockUser:mockPassword".getBytes())));
+		headers.add("Authorization", "Basic " + new String(Base64.encodeBase64("mockUser:mockPassword".getBytes(Charset.forName("UTF-8"))), Charset.forName("UTF-8")));
 		headers.add("Content-Type", MediaType.APPLICATION_JSON);
 
 		ResponseEntity<EmailResponse> responseEntity = restTemplate.exchange("/SendEmail", HttpMethod.POST,
@@ -91,7 +93,7 @@ public class EmailServerRestfulTest {
 		emailRequest.setBody(null);
 
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("Authorization", "Basic " + new String(Base64.encodeBase64("mockUser:mockPassword".getBytes())));
+		headers.add("Authorization", "Basic " + new String(Base64.encodeBase64("mockUser:mockPassword".getBytes(Charset.forName("UTF-8"))), Charset.forName("UTF-8")));
 		headers.add("Content-Type", MediaType.APPLICATION_JSON);
 
 		ResponseEntity<EmailResponse> responseEntity = restTemplate.exchange("/SendEmail", HttpMethod.POST,
@@ -115,8 +117,8 @@ public class EmailServerRestfulTest {
 
 		HttpHeaders headers = new HttpHeaders();
 
-		byte[] base64Bytes = Base64.encodeBase64("mockUser:mockPassword".getBytes());
-		String user = new String(base64Bytes);
+		byte[] base64Bytes = Base64.encodeBase64("mockUser:mockPassword".getBytes(Charset.forName("UTF-8")));
+		String user = new String(base64Bytes, Charset.forName("UTF-8"));
 
 		headers.add("Authorization", "Basic " + user);
 		headers.add("Content-Type", MediaType.APPLICATION_JSON);
@@ -135,7 +137,7 @@ public class EmailServerRestfulTest {
 		emailRequest.setBody("test");
 
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("Authorization", "Basic " + new String(Base64.encodeBase64("mockUser1:mockPassword1".getBytes())));
+		headers.add("Authorization", "Basic " + new String(Base64.encodeBase64("mockUser1:mockPassword1".getBytes(Charset.forName("UTF-8"))), Charset.forName("UTF-8")));
 		headers.add("Content-Type", MediaType.APPLICATION_JSON);
 
 		ResponseEntity<EmailResponse> responseEntity = restTemplate.exchange("/SendEmail", HttpMethod.POST,

@@ -26,7 +26,7 @@ public class FailoverControllerTest {
 		assertNotNull(failoverControllerInterface);
 		assertNotNull(failoverControllerInterface.getMailGunClient());
 		assertNotNull(failoverControllerInterface.getSendGridClient());
-		assertTrue(failoverControllerInterface.getAvailableClients().length > 0);
+		assertTrue(failoverControllerInterface.getAvailableClients() > 0);
 		int statusCode = failoverControllerInterface.handleEmailSending();
 		assertEquals(statusCode, Response.Status.OK.getStatusCode());
 	}
@@ -43,7 +43,7 @@ public class FailoverControllerTest {
 		assertNotNull(failoverControllerInterface);
 		assertNotNull(failoverControllerInterface.getMailGunClient());
 		assertNotNull(failoverControllerInterface.getSendGridClient());
-		assertTrue(failoverControllerInterface.getAvailableClients().length > 0);
+		assertTrue(failoverControllerInterface.getAvailableClients() > 0);
 		
 		int statusCode = failoverControllerInterface.handleEmailSending();
 		assertEquals(statusCode, Response.Status.OK.getStatusCode());

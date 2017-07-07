@@ -1,5 +1,7 @@
 package com.challenge.code.StandaloneEmailServer.email.clients;
 
+import java.nio.charset.Charset;
+
 import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.codec.binary.Base64;
@@ -40,7 +42,7 @@ public class MailGunClient implements MailClientInterface {
 					
 			RestTemplate template = new RestTemplate();
 
-			byte[] base64Bytes = Base64.encodeBase64(API_KEY.getBytes());
+			byte[] base64Bytes = Base64.encodeBase64(API_KEY.getBytes(Charset.forName("UTF-8")));
 			
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("from", "test@mailgun.com");
@@ -49,7 +51,7 @@ public class MailGunClient implements MailClientInterface {
 			map.add("text", emailBean.getBody()); 
 
 			HttpHeaders headers = new HttpHeaders();
-			headers.add("Authorization", "Basic " + new String(base64Bytes));
+			headers.add("Authorization", "Basic " + new String(base64Bytes, Charset.forName("UTF-8")));
 			headers.add("Content-Type", MediaType.APPLICATION_FORM_URLENCODED);
 
 			ResponseEntity<String> response = template.exchange(MAILGUN_URL, HttpMethod.POST,new HttpEntity<>(map, headers), String.class);

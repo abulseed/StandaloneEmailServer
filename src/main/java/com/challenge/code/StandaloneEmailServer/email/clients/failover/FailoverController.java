@@ -64,8 +64,8 @@ public class FailoverController implements FailoverControllerInterface {
 	}
 
 	@Override
-	public MailClientInterface[] getAvailableClients() {
-		return availableClients;
+	public int getAvailableClients() {
+		return availableClients.length;
 	}
 
 	public EmailRequest getEmailRequest() {
